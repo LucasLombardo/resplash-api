@@ -3,3 +3,17 @@ type User {
   name: String!
   email: String!
 }
+
+type Photo {
+  id: ID! @unique
+  title:  String!
+  photographer: String
+  photographerLink: String
+  description: String
+  thumbnail: String!
+  largeImage: String!
+  price: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  # user: User!
+}
