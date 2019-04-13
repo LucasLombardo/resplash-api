@@ -3,6 +3,7 @@
 type Mutation {
   createPhoto(data: PhotoCreateInput!): Photo!
   updatePhoto(data: PhotoUpdateInput!): Photo!
+  deletePhoto(id: ID!): Photo
 }
 
 type Query {

@@ -16,6 +16,15 @@ const Mutation = {
             where: { id: args.data.id },
             data: updates
         }, info);
+    },
+
+    async deletePhoto(parent, args, ctx, info) {
+        const where = { id: args.id };
+        // since this is intermediary query, we have to manually pass the
+        // the raw graphql { id title } rather than just passing info param
+        const photo = await ctx.db.query.photo({ where }, `{ id title }`);
+        // delete the photo
+        return ctx.db.mutation.deletePhoto({ where }, info);
     }
 
 };
