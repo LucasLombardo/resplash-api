@@ -1,7 +1,19 @@
+# import * from './generated/prisma.graphql'
+
 type Mutation {
-  temp: String
+  createPhoto(data: PhotoCreateInput!): Photo!
 }
 
 type Query {
-  temp: String
+  photos: [Photo]!
+}
+
+input PhotoCreateInput {
+  title: String!
+  photographer: String
+  photographerLink: String
+  description: String
+  thumbnail: String!
+  largeImage: String!
+  price: Int!
 }
