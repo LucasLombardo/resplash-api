@@ -6,6 +6,7 @@ type Mutation {
 
 type Query {
   photos: [Photo]!
+  photo(where: PhotoWhereUniqueInput!): Photo
 }
 
 input PhotoCreateInput {
