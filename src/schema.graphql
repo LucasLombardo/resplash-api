@@ -2,6 +2,7 @@
 
 type Mutation {
   createPhoto(data: PhotoCreateInput!): Photo!
+  updatePhoto(data: PhotoUpdateInput!): Photo!
 }
 
 type Query {
@@ -17,4 +18,13 @@ input PhotoCreateInput {
   thumbnail: String!
   largeImage: String!
   price: Int!
+}
+
+input PhotoUpdateInput {
+  id: ID!
+  title: String
+  photographer: String
+  photographerLink: String
+  description: String
+  price: Int
 }
