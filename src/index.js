@@ -1,8 +1,13 @@
+const cookieParser = require(`cookie-parser`);
+
 require(`dotenv`).config({ path: `.env` });
 const createServer = require(`./createServer`);
 const db = require(`./db`); // eslint-disable-line
 
 const server = createServer();
+
+// middleware to handle JWT cookies
+server.express.use(cookieParser());
 
 server.start({
     cors: {

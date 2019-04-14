@@ -4,6 +4,7 @@ type Mutation {
   createPhoto(data: PhotoCreateInput!): Photo!
   updatePhoto(data: PhotoUpdateInput!): Photo!
   deletePhoto(id: ID!): Photo
+  signUp(email: String!, password: String!, name: String!): User!
 }
 
 type Query {
