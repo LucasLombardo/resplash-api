@@ -1,5 +1,5 @@
-# source: https://us1.prisma.sh/lucas-lombardo-d870ae/resplash-api/dev
-# timestamp: Fri Apr 12 2019 19:32:09 GMT-0400 (Eastern Daylight Time)
+# source: https://resplash-production-5448e0523c.herokuapp.com/resplash-prod/prod
+# timestamp: Sun Apr 14 2019 15:13:53 GMT-0400 (Eastern Daylight Time)
 
 type AggregatePhoto {
   count: Int!
@@ -88,7 +88,6 @@ type PhotoConnection {
 }
 
 input PhotoCreateInput {
-  id: ID
   title: String!
   photographer: String
   photographerLink: String
@@ -600,7 +599,6 @@ type UserConnection {
 }
 
 input UserCreateInput {
-  id: ID
   name: String!
   email: String!
 }

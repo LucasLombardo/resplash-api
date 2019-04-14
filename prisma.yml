@@ -1,6 +1,9 @@
 endpoint: ${env:PRISMA_ENDPOINT}
+# endpoint: https://resplash-production-5448e0523c.herokuapp.com/resplash-prod/prod
 datamodel: datamodel.prisma
 # secret: ${env:PRISMA_SECRET}
 hooks:
   post-deploy:
     - graphql get-schema -p prisma
+
+# switch endpoints and toggle secret to switch between prod and dev
