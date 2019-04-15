@@ -1,10 +1,6 @@
 enum Permission {
   ADMIN
   USER
-  PHOTOCREATE
-  PHOTOUPDATE
-  PHOTODELETE
-  PERMISSIONUPDATE
 }
 
 type User {
@@ -12,8 +8,6 @@ type User {
   name: String!
   email: String! @unique
   password: String!
-  resetToken: String
-  resetTokenExpiry: String
   permissions: [Permission]
 }
 
