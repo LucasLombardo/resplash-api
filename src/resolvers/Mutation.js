@@ -59,6 +59,7 @@ const Mutation = {
         const user = await ctx.db.query.user({ where: { email }});
         if( !user ) throw new Error(`No user found with email ${ email }`);
         // check password
+        console.log(password);
         const valid = await bcrypt.compare(password, user.password);
         if(!valid) throw new Error(`Incorrect password`);
         // create token and set the cookie
@@ -73,6 +74,22 @@ const Mutation = {
     signOut(parent, args, ctx, info) {
         ctx.response.clearCookie(`token`);
         return { message: `goodbye` };
+    },
+
+    async changePassword(parent, args, ctx, info) {
+        // get the user
+        const user = await ctx.db.query.user({ where: { email: args.email }});
+        // check if the current password is valid
+        const valid = await bcrypt.compare(args.password, user.password);
+        if(!valid) throw new Error(`Incorrect password`);
+        // reset the password
+        const newPassword = await bcrypt.hash(args.newPassword, 10);
+        // save the new hashed password
+        const updatedUser = await ctx.db.mutation.updateUser({
+            where: { email: user.email },
+            data: { password: newPassword },
+        });
+        return updatedUser;
     }
 };
 
