@@ -16,7 +16,14 @@ const Mutation = {
         return photo;
     },
 
-    updatePhoto(parent, args, ctx, info) {
+    async updatePhoto(parent, args, ctx, info) {
+        const photo = await ctx.db.query.photo({ where: { id: args.data.id } }, `{ id title user { id }}`);
+        // check that user has permission to update
+        const ownsPhoto = photo.user.id === ctx.request.userId;
+        const isAdmin = ctx.request.user.permissions.includes(`ADMIN`);
+        if (!ownsPhoto && !isAdmin) {
+            throw new Error(`You don't have permission to do that.`);
+        }
         // copy the updates and delete the id
         const updates = { ...args.data };
         delete updates.id;
@@ -31,7 +38,13 @@ const Mutation = {
         const where = { id: args.id };
         // since this is intermediary query, we have to manually pass the
         // the raw graphql { id title } rather than just passing info param
-        const photo = await ctx.db.query.photo({ where }, `{ id title }`);
+        const photo = await ctx.db.query.photo({ where }, `{ id title user { id }}`);
+        // check that user has permission to delete
+        const ownsPhoto = photo.user.id === ctx.request.userId;
+        const isAdmin = ctx.request.user.permissions.includes(`ADMIN`);
+        if (!ownsPhoto && !isAdmin) {
+            throw new Error(`You don't have permission to do that.`);
+        }
         // delete the photo
         return ctx.db.mutation.deletePhoto({ where }, info);
     },
@@ -40,12 +53,14 @@ const Mutation = {
         args.email = args.email.toLowerCase();
         // hash their password with a one way hash, generate random salt length 10
         const password = await bcrypt.hash(args.password, 10);
+        // set permissions to admin if matches admin email
+        const permissions = { set: args.email === `lucasl@bu.edu` ? [`USER`, `ADMIN`] : [`USER`]};
         // create the user and overwrite password with the hashed password
         const user = await ctx.db.mutation.createUser({
             data: {
                 ...args,
                 password,
-                permissions: { set: [`USER`] }
+                permissions,
             }
         }, info);
         // create the JWT token and set it as a cookie on the response
