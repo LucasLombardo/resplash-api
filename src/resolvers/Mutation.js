@@ -4,8 +4,14 @@ const jwt = require(`jsonwebtoken`);
 const Mutation = {
 
     async createPhoto(parent, args, ctx, info) {
+        if(!ctx.request.userId) {
+            throw new Error(`You must be logged in to create a photo`);
+        }
         const photo = await ctx.db.mutation.createPhoto({
-            data: { ...args.data }
+            data: { ...args.data, user: {
+                // creates relationship to user
+                connect: { id: ctx.request.userId }
+            }}
         }, info);
         return photo;
     },
