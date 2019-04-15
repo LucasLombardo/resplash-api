@@ -1,11 +1,16 @@
 # import * from './schema_prep.graphql'
 
+type SuccessMessage {
+  message: String
+}
+
 type Mutation {
   createPhoto(data: PhotoCreateInput!): Photo!
   updatePhoto(data: PhotoUpdateInput!): Photo!
   deletePhoto(id: ID!): Photo
   signUp(email: String!, password: String!, name: String!): User!
   signIn(email: String!, password: String!): User!
+  signOut: SuccessMessage
 }
 
 type Query {
