@@ -94,7 +94,6 @@ type PhotoConnection {
 }
 
 input PhotoCreateInput {
-  id: ID
   title: String!
   photographer: String
   photographerLink: String
@@ -717,7 +716,6 @@ type UserConnection {
 }
 
 input UserCreateInput {
-  id: ID
   name: String!
   email: String!
   password: String!
