@@ -80,7 +80,6 @@ const Mutation = {
         const user = await ctx.db.query.user({ where: { email }});
         if( !user ) throw new Error(`No user found with email ${ email }`);
         // check password
-        console.log(password);
         const valid = await bcrypt.compare(password, user.password);
         if(!valid) throw new Error(`Incorrect password`);
         // create token and set the cookie
