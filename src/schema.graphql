@@ -36,6 +36,8 @@ input PhotoCreateInput {
   thumbnail: String!
   largeImage: String!
   price: Int!
+  width: Int!
+  height: Int!
 }
 
 input PhotoUpdateInput {

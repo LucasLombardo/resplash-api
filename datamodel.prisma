@@ -13,13 +13,15 @@ type User {
 
 type Photo {
   id: ID! @unique
-  title:  String!
+  title: String!
   photographer: String
   photographerLink: String
   description: String
   thumbnail: String!
   largeImage: String!
   price: Int!
+  height: Int!
+  width: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
   user: User!
