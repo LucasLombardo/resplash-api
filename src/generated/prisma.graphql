@@ -1,5 +1,5 @@
 # source: https://resplash-production-5448e0523c.herokuapp.com/resplash-prod/prod
-# timestamp: Tue Apr 16 2019 11:51:31 GMT-0400 (Eastern Daylight Time)
+# timestamp: Wed Apr 17 2019 19:40:54 GMT-0400 (Eastern Daylight Time)
 
 type AggregatePhoto {
   count: Int!
@@ -78,6 +78,8 @@ type Photo implements Node {
   thumbnail: String!
   largeImage: String!
   price: Int!
+  height: Int!
+  width: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
   user: User!
@@ -101,6 +103,8 @@ input PhotoCreateInput {
   thumbnail: String!
   largeImage: String!
   price: Int!
+  height: Int!
+  width: Int!
   user: UserCreateOneInput!
 }
 
@@ -130,6 +134,10 @@ enum PhotoOrderByInput {
   largeImage_DESC
   price_ASC
   price_DESC
+  height_ASC
+  height_DESC
+  width_ASC
+  width_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -145,6 +153,8 @@ type PhotoPreviousValues {
   thumbnail: String!
   largeImage: String!
   price: Int!
+  height: Int!
+  width: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -196,6 +206,8 @@ input PhotoUpdateInput {
   thumbnail: String
   largeImage: String
   price: Int
+  height: Int
+  width: Int
   user: UserUpdateOneRequiredInput
 }
 
@@ -207,6 +219,8 @@ input PhotoUpdateManyMutationInput {
   thumbnail: String
   largeImage: String
   price: Int
+  height: Int
+  width: Int
 }
 
 input PhotoWhereInput {
@@ -520,6 +534,50 @@ input PhotoWhereInput {
 
   """All values greater than or equal the given value."""
   price_gte: Int
+  height: Int
+
+  """All values that are not equal to given value."""
+  height_not: Int
+
+  """All values that are contained in given list."""
+  height_in: [Int!]
+
+  """All values that are not contained in given list."""
+  height_not_in: [Int!]
+
+  """All values less than the given value."""
+  height_lt: Int
+
+  """All values less than or equal the given value."""
+  height_lte: Int
+
+  """All values greater than the given value."""
+  height_gt: Int
+
+  """All values greater than or equal the given value."""
+  height_gte: Int
+  width: Int
+
+  """All values that are not equal to given value."""
+  width_not: Int
+
+  """All values that are contained in given list."""
+  width_in: [Int!]
+
+  """All values that are not contained in given list."""
+  width_not_in: [Int!]
+
+  """All values less than the given value."""
+  width_lt: Int
+
+  """All values less than or equal the given value."""
+  width_lte: Int
+
+  """All values greater than the given value."""
+  width_gt: Int
+
+  """All values greater than or equal the given value."""
+  width_gte: Int
   createdAt: DateTime
 
   """All values that are not equal to given value."""
