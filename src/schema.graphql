@@ -15,7 +15,8 @@ type Mutation {
 }
 
 type Query {
-  photos: [Photo]!
+  photos(where: PhotoWhereInput, orderBy: PhotoOrderByInput, skip: Int, first: Int): [Photo]!
+  photosConnection(where: PhotoWhereInput): PhotoConnection!
   photo(where: PhotoWhereUniqueInput!): Photo
   me: User
 }
