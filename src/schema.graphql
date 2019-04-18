@@ -30,9 +30,11 @@ type User {
 
 input PhotoCreateInput {
   title: String!
+  description: String
+  lowercaseTitle: String
+  lowercaseDescription: String
   photographer: String
   photographerLink: String
-  description: String
   thumbnail: String!
   largeImage: String!
   price: Int!
