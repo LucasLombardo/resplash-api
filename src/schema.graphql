@@ -47,6 +47,8 @@ input PhotoUpdateInput {
   title: String
   photographer: String
   photographerLink: String
+  lowercaseTitle: String
+  lowercaseDescription: String
   description: String
   price: Int
 }
